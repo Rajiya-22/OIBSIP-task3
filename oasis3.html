@@ -3,100 +3,103 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
-    <title>Your Portfolio</title>
+    <title>Temperature Converter</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
             background-color: #f4f4f4;
         }
 
-        header {
-            background-color: #333;
-            color: #fff;
+        #converter {
+            background-color: #2ecc71; /* Green color */
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            padding: 30px;
             text-align: center;
-            padding: 1em 0;
+            margin: 20px;
+            max-width: 400px;
         }
 
-        section {
-            max-width: 800px;
-            margin: 2em auto;
-            padding: 1em;
-            background-color: #fff;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        h1 {
+            color: #fff; /* White text for contrast */
+            margin-bottom: 20px;
         }
 
-        h1, h2 {
-            color: #333;
+        input, select, button {
+            margin-bottom: 20px;
+            padding: 15px;
+            font-size: 18px;
+            width: 100%;
+            box-sizing: border-box;
+            border: 1px solid #27ae60; /* Darker green border */
+            border-radius: 5px;
+            outline: none;
         }
 
-        .project {
-            margin-bottom: 1em;
+        select {
+            appearance: none;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23fff" width="18px" height="18px"><path d="M0 0h24v24H0z" fill="none"/><path d="M7 10l5 5 5-5z" fill="%23fff"/></svg>');
+            background-repeat: no-repeat;
+            background-position: right 10px center;
         }
 
-        footer {
-            text-align: center;
-            padding: 1em 0;
-            background-color: #333;
+        button {
+            background-color: #27ae60; /* Darker green button */
             color: #fff;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+        }
+
+        #result {
+            font-size: 20px;
+            margin-top: 20px;
+            color: #fff; /* White text for contrast */
         }
     </style>
 </head>
 <body>
+    <div id="converter">
+        <h1>Temperature Converter</h1>
+        <input type="number" id="temperatureInput" placeholder="Enter temperature" required>
+        <select id="unitSelect">
+            <option value="celsius">Celsius</option>
+            <option value="fahrenheit">Fahrenheit</option>
+            <option value="kelvin">Kelvin</option>
+        </select><br>
+        <button onclick="convertTemperature()">Convert</button>
+        <div id="result"></div>
+    </div>
 
-    <header>
-        <h1 style="color:#fff">Rajiya Sulthana Shaik</h1>
-        <p><i class='fas fa-laptop-code' style='font-size:24px;' style='color:#fff' ></i>Student at Sri Vasavi Engineering College</p>
-    </header>
-    <section>
-        <h2>Objective</h2>
-        <p>Dedicated and results-driven software engineer with a passion for creating efficient and user-friendly applications. Seeking a challenging position in a dynamic team where my technical skills, problem-solving abilities, and commitment to achieving high-quality results can contribute to the company's success and innovation.
-        </p>
-    </section>
-    <section>
-        <h2>Education</h2>
-        <ul>
-            <li>Bachelor of Technology(pursuing)</li>
-            <li>Intermediate(9.6)</li>
-            <li>Board of Secondary Education(9.8)</li>
-        </ul>
-    </section>
-    <section>
-        <h2>Skills</h2>
-        <ul>
-            <li>C++</li>
-            <li>Java</li>
-            <li>Django</li>
-            <li>HTML</li>
-            <li>CSS</li>
-        </ul>
-    </section>
-    <section>
-        <h2>My Projects</h2>
-        <div class="project">
-            <p>"Hospital Management System"
-                Using:
-                <ul>
-                    <li>HTML</li>
-                    <li>CSS</li>
-                    <li>Bootstrap</li>
-                    <li>Django</li>
-                </ul>
-            </p>
-        </div>
-    </section>
-    <section>
-        <h2>Interests</h2>
-        <ul>
-            <li>Reading Books</li>
-            <li>Watching Television</li>
-        </ul>
-    </section>
-    <footer>
-        <p>Contact me at: shaikrajiyasulthana13455@gmail.com</p>
-    </footer>
+    <script>
+        function convertTemperature() {
+            const temperatureInput = parseFloat(document.getElementById('temperatureInput').value);
+            const unitSelect = document.getElementById('unitSelect').value;
+            let result;
+
+            if (isNaN(temperatureInput)) {
+                alert('Please enter a valid number for temperature.');
+                return;
+            }
+
+            if (unitSelect === 'celsius') {
+                result = (temperatureInput * 9/5) + 32;
+                document.getElementById('result').innerHTML = `${temperatureInput} Celsius is ${result.toFixed(2)} Fahrenheit.`;
+            } else if (unitSelect === 'fahrenheit') {
+                result = (temperatureInput - 32) * 5/9;
+                document.getElementById('result').innerHTML = `${temperatureInput} Fahrenheit is ${result.toFixed(2)} Celsius.`;
+            } else if (unitSelect === 'kelvin') {
+                result = temperatureInput + 273.15;
+                document.getElementById('result').innerHTML = `${temperatureInput} Kelvin is ${result.toFixed(2)} Celsius.`;
+            }
+        }
+    </script>
 
 </body>
 </html>
